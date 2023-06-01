@@ -10,6 +10,24 @@ export const sveaBus = () => {
     eventHandlers.get(event)?.push(handler);
   };
 
+  const off1 = (event: string, handler: EventHandler) => {
+    const handlers = eventHandlers.get(event);
+    if (handlers) {
+      const index = handlers.indexOf(handler);
+      if (index !== -1) {
+        handlers.splice(index, 1);
+      }
+    }
+  };
+
+  const off2 = (event: string, handler: EventHandler) => {
+    const handlers = eventHandlers.get(event);
+    if (handlers) {
+      const filteredHandlers = handlers.filter((h) => h !== handler);
+      eventHandlers.set(event, filteredHandlers);
+    }
+  };
+
   const emit = (event: string, ...args: any[]) => {
     const handlers = eventHandlers.get(event);
     if (handlers) {
@@ -18,12 +36,14 @@ export const sveaBus = () => {
   };
 
   // Clean up event handlers on component unmount
-  const clear = (): void => {
+  const clear = () => {
     eventHandlers.clear();
   };
 
   return {
     on,
+    off1,
+    off2,
     emit,
     clear,
     eventHandlers: Object.freeze(eventHandlers) as ReadonlyMap<

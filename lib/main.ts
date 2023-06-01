@@ -10,21 +10,13 @@ export const sveaBus = () => {
     eventHandlers.get(event)?.push(handler);
   };
 
-  const off1 = (event: string, handler: EventHandler) => {
+  const off = (event: string, handler: EventHandler) => {
     const handlers = eventHandlers.get(event);
     if (handlers) {
       const index = handlers.indexOf(handler);
       if (index !== -1) {
         handlers.splice(index, 1);
       }
-    }
-  };
-
-  const off2 = (event: string, handler: EventHandler) => {
-    const handlers = eventHandlers.get(event);
-    if (handlers) {
-      const filteredHandlers = handlers.filter((h) => h !== handler);
-      eventHandlers.set(event, filteredHandlers);
     }
   };
 
@@ -42,9 +34,7 @@ export const sveaBus = () => {
 
   return {
     on,
-    off: off1,
-    off1,
-    off2,
+    off,
     emit,
     clear,
     eventHandlers: Object.freeze(eventHandlers) as ReadonlyMap<

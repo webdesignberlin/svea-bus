@@ -15,13 +15,7 @@ describe('benchmarking events', () => {
 
   bench('test splice', () => {
     items.forEach((item) => {
-      bus.off1(`event-${item}`, handler)
-    });
-  }, { setup });
-
-  bench('test filter', () => {
-    items.forEach((item) => {
-      bus.off2(`event-${item}`, handler)
+      bus.off(`event-${item}`, handler)
     });
   }, { setup });
 });
@@ -43,13 +37,7 @@ describe('benchmarking handlers', () => {
 
   bench('test splice', () => {
     items.forEach((item) => {
-      bus.off1(`event-${item}`, handler)
-    });
-  }, { setup });
-
-  bench('test filter', () => {
-    items.forEach((item) => {
-      bus.off2(`event-${item}`, handler)
+      bus.off(`event-${item}`, handler)
     });
   }, { setup });
 });

@@ -1,4 +1,4 @@
-import { vi, describe, beforeEach, afterEach, bench } from 'vitest';
+import { describe, bench } from 'vitest';
 import { sveaBus } from './main';
 
 describe('benchmarking events', () => {

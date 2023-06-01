@@ -1,11 +1,18 @@
-import { defineConfig } from 'vite'
+/// <reference types="vitest" />
+
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
     lib: {
       entry: './lib/main.ts',
-      name: 'Counter',
-      fileName: 'counter'
-    }
-  }
-})
+      name: 'svea-bus',
+      fileName: 'svea-bus',
+    },
+  },
+  test: {
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+    },
+  },
+});

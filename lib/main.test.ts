@@ -36,4 +36,25 @@ describe('svea-bus', () => {
     expect(handler1).toHaveBeenCalledWith('whats up?');
     expect(handler2).toHaveBeenCalledWith('whats up?');
   });
+
+  it('should remove event handlers with off', () => {
+    const handler1 = vi.fn();
+    const handler2 = vi.fn();
+
+    bus.on('event-3', handler1);
+    bus.on('event-3', handler2);
+
+    bus.emit('event-3', 'yo yo');
+
+    // expect(handler1).toHaveBeenCalledWith('yo yo');
+    // expect(handler2).toHaveBeenCalledWith('yo yo');
+    expect(handler1).toHaveBeenCalledTimes(1);
+    expect(handler2).toHaveBeenCalledTimes(1);
+
+    bus.off('event-3', handler1);
+    bus.emit('event-3', 'dont run again');
+
+    expect(handler1).toHaveBeenCalledTimes(1);
+    expect(handler2).toHaveBeenCalledTimes(2);
+  });
 });

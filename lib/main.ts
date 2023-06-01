@@ -42,6 +42,7 @@ export const sveaBus = () => {
 
   return {
     on,
+    off: off1,
     off1,
     off2,
     emit,

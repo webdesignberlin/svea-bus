@@ -7,22 +7,25 @@
     "dist",
     "index.d.ts"
   ],
-  "main": "./dist/counter.umd.cjs",
-  "module": "./dist/counter.js",
+  "main": "./dist/svea-bus.umd.cjs",
+  "module": "./dist/svea-bus.js",
   "types": "./index.d.ts",
   "exports": {
     "types": "./index.d.ts",
-    "import": "./dist/counter.js",
-    "require": "./dist/counter.umd.cjs"
+    "import": "./dist/svea-bus.js",
+    "require": "./dist/svea-bus.umd.cjs"
   },
   "scripts": {
     "dev": "vite",
+    "declaration": "tsc lib/main.ts --declaration --emitDeclarationOnly --esModuleInterop --outFile dist/svea-bus.d.ts",
     "build": "tsc && vite build",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:bench": "vitest bench"
   },
   "devDependencies": {
     "@vitest/coverage-c8": "^0.30.0",
+    "mitt": "^3.0.0",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
     "vitest": "^0.30.0"

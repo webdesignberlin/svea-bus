@@ -17,8 +17,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "declaration": "tsc lib/main.ts --declaration --emitDeclarationOnly --esModuleInterop --outFile dist/svea-bus.d.ts",
-    "build": "tsc && vite build",
+    "declaration": "tsc lib/main.ts --declaration --emitDeclarationOnly --esModuleInterop --outFile index.d.ts",
+    "build": "npm run declaration && tsc && vite build",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:bench": "vitest bench"

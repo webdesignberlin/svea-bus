@@ -6,7 +6,87 @@
     <title>svea-bus demo</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <label>
+    Event Name
+    <input type="text" name="event-name" value="fire">
+  </label>
+    <label>
+      Message
+      <input type="text" name="message" value="whats up?">
+    </label>
+    <div>
+      <button class="btn">fire</button>
+      <button class="btn btn--stop">stop</button>
+      <code>
+        <pre class="pre"></pre>
+      </code>
+    </div>
+
+    <script type="module" src="https://unpkg.com/svea-bus@1.0.0/dist/svea-bus.js"></script>
+    <script type="module" async>
+      import { sveaBus } from './lib/main.ts';
+      const {
+        on,
+        off,
+        emit,
+        clear,
+        eventHandlers,
+      } = sveaBus();
+
+      const elBtn = document.querySelector('.btn');
+      const elInput = document.querySelector('[name="message"]');
+      const elEventName = document.querySelector('[name="event-name"]');
+      const elStop = document.querySelector('.btn--stop');
+      const elPre = document.querySelector('.pre');
+
+      const getEventName = () => (elEventName.value);
+      const handler = (data) => { console.log('Event received:', data) };
+
+      const registerEvent = () => {
+        on(getEventName(), handler);
+      };
+      registerEvent();
+
+      const update = () => {
+        registerEvent();
+        console.log(eventHandlers);
+        console.log(eventHandlers.get('fire').toLocaleString());
+        elPre.innerText = `${JSON.stringify([...eventHandlers.keys()].map((event) => ({
+          event,
+          handlers: eventHandlers.get(event).length,
+        })))
+        .replaceAll('[', '')
+        .replaceAll(']','')
+        .replaceAll('{', '')
+        .replaceAll('}', '\n')
+        .replaceAll(',', '\n')}\n`;
+      }
+
+      const fire = (val) => {
+        emit(getEventName(), val);
+      };
+
+      const stop = () => {
+        off(getEventName(), handler);
+      };
+
+      elBtn.addEventListener('click', () => fire(elInput.value))
+      elBtn.addEventListener('click', () => update())
+      elStop.addEventListener('click', stop);
+    </script>
   </body>
+  <style>
+    body {
+      height: 100dvmin;
+      display: grid;
+      place-items: center;
+      place-content: center;
+      gap: 2rem;
+    }
+
+    pre {
+      white-space: pre-line;
+      max-width: 50rem;
+    }
+  </style>
 </html>

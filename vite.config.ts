@@ -9,6 +9,7 @@ export default defineConfig({
       name: 'svea-bus',
       fileName: 'svea-bus',
     },
+    sourcemap: true,
   },
   test: {
     coverage: {

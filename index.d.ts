@@ -8,3 +8,6 @@ declare module "main" {
         eventHandlers: ReadonlyMap<string, readonly EventHandler[]>;
     };
 }
+declare module "compare.bench" { }
+declare module "main.bench" { }
+declare module "main.test" { }

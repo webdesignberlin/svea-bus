@@ -17,8 +17,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "declaration": "tsc lib/main.ts --declaration --emitDeclarationOnly --esModuleInterop --outFile index.d.ts",
-    "build": "npm run declaration && tsc && vite build",
+    "declaration": "tsc lib/main.ts --declaration --emitDeclarationOnly --esModuleInterop --outFile dist/index.d.ts",
+    "build": "tsc && vite build && npm run declaration",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:bench": "vitest bench"

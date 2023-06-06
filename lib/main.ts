@@ -1,3 +1,4 @@
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type EventHandler = (...args: any[]) => void;
 
 export const sveaBus = () => {
@@ -19,7 +20,7 @@ export const sveaBus = () => {
       }
     }
   };
-
+  // @typescript-eslint/no-explicit-any
   const emit = (event: string, ...args: any[]) => {
     const handlers = eventHandlers.get(event);
     if (handlers) {
